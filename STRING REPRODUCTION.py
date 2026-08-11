@@ -10,6 +10,7 @@ scores = []
 pop = [random_string(len_string) for j in range (20)]
 found_sol = False
 sortarr = []
+children = []
 
 def v_tuple(tuple):
     for item in tuple:
@@ -32,15 +33,27 @@ def sort(scores):
 def mate(sorted_scores):
     for item in sorted_scores:
         sortarr.append(item[0])
+    for i in range(20):
+        child = ""
+        Hindividual = sortarr[randint(0, 4)]
+        Lindividual = sortarr[randint(15, 19)]
+        for f in range(len_string):
+            child += choice(Hindividual[f] + Lindividual[f])
+        children.append(child)
+    return children
 
-    return sortarr
+
+print(sort(evaluate(pop)))
 print(mate(sort(evaluate(pop))))
-print("this is the mating")
-#
-#def mutate(population):
-#    for string in population:
-#        if randint(0, 100) >= 90:
-#            string[randint(0, (len_string -1))] = string.join(choice(string.ascii_letters + " " + string.digits + string.punctuation))
+
+def mutate(population):
+    for i in range(20):
+        string = population[i]
+        if randint(0, 100) >= 90:
+            letters = string.ascii_letters + " " + string.digits + string.punctuation
+            listed_string = list(string)
+
+
 
 #print(mutate(scores))
 
