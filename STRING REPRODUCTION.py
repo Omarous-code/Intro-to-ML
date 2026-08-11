@@ -1,5 +1,4 @@
 import string
-from ftplib import print_line
 from random import randint, choice
 
 def random_string(length):
@@ -10,6 +9,7 @@ len_string = len(target_string)
 scores = []
 pop = [random_string(len_string) for j in range (20)]
 found_sol = False
+sortarr = []
 
 def v_tuple(tuple):
     for item in tuple:
@@ -22,12 +22,8 @@ def evaluate(population):
             if string[i] == target_string[i]:
                 score += 1
             finalscore = (score / len_string) * 100
-        if finalscore == 100.0:
-            global found_sol = True
-            break
-        else:
-            scores.append((string, finalscore))
-            return scores
+        scores.append((string, finalscore))
+    return scores
 
 
 def sort(scores):
@@ -35,7 +31,8 @@ def sort(scores):
     return sorted_scores
 def mate(sorted_scores):
     for item in sorted_scores:
-        sortarr = [item[0]]
+        sortarr.append(item[0])
+
     return sortarr
 print(mate(sort(evaluate(pop))))
 print("this is the mating")
