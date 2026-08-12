@@ -1,6 +1,7 @@
 import string
 from random import randint, choice
 
+letters = string.ascii_letters + " " + string.digits + string.punctuation
 def random_string(length):
     letters = string.ascii_letters + " " + string.digits + string.punctuation
     return ''.join(choice(letters) for i in range(length))
@@ -48,13 +49,14 @@ print(mate(sort(evaluate(pop))))
 
 def mutate(population):
     for i in range(20):
-        string = population[i]
         if randint(0, 100) >= 90:
-            letters = string.ascii_letters + " " + string.digits + string.punctuation
-            listed_string = list(string)
+            listed_string = list(population[i])
+            listed_string[randint(0, len_string -1)] = choice(letters)
+            population[i] = ''.join(listed_string)
+    return population
 
 
 
-#print(mutate(scores))
+print(mutate(mate(sort(evaluate(pop)))))
 
 print(target_string)
