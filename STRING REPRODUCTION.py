@@ -1,5 +1,6 @@
 import string
 from random import randint, choice
+from time import sleep
 
 letters = string.ascii_letters + " " + string.digits + string.punctuation
 def random_string(length):
@@ -9,6 +10,8 @@ target_string = input("Enter a string: ")
 len_string = len(target_string)
 pop = [random_string(len_string) for j in range (20)]
 found_sol = False
+generation = 0
+max_generation = 100000
 
 
 def evaluate(population):
@@ -61,17 +64,22 @@ def check_score(sorted_scores):
 
 
 
-while found_sol == False:
+
+while found_sol == False and generation < max_generation:
     sorted_population = (sort(evaluate(pop)))
     check_score(sorted_population)
     print(sorted_population)
-    mated_population = mate(sorted_population)
-    print(mated_population)
-    mutated_population = mutate(mated_population)
-    print(mutated_population)
-    pop.clear()
-    pop = mutated_population
-    print(pop)
-    print("this is pop")
-    print(target_string)
+    if sorted_population[0][1] != 100:
+        mated_population = mate(sorted_population)
+        print(mated_population)
+        mutated_population = mutate(mated_population)
+        print(mutated_population)
+        pop.clear()
+        pop = mutated_population
+        print(pop)
+        print("this is pop")
+        generation += 1
+        print("generation " + str(generation))
+
+
 
